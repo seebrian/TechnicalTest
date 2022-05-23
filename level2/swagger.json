@@ -1,0 +1,155 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API document for DSTT contract",
+        "version": "1.0.0",
+        "title": "Technical Test",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "contract",
+            "description": "interact with DSTT contract"
+        }
+    ],
+    "paths": {
+        "/contract/mint": {
+            "post": {
+                "tags": [
+                    "contract"
+                ],
+                "summary": "Mint tokens",
+                "description": "",
+                "operationId": "mint",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Number of tokens want to mint",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "default": {
+                                "amount": 1000
+                            },
+                            "required": [
+                                "amount"
+                            ],
+                            "properties": {
+                                "amount": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mint DSTT tokens successfully",
+                        "schema": {
+                            "$ref": "#/definitions/responseMessage"
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/responseMessage"
+                        }
+                    }
+                }
+            }
+        },
+        "/contract/transfer": {
+            "post": {
+                "tags": [
+                    "contract"
+                ],
+                "summary": "Transfer Tokens",
+                "description": "",
+                "operationId": "transfer",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Number of tokens want to mint",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "required": [
+                                "amount",
+                                "transferTo"
+                            ],
+                            "default": {
+                                "amount": 1000,
+                                "transferTo": "0x3126081ee598F6658eF6b1aA6A067484759DE4cA"
+                            },
+                            "properties": {
+                                "amount": {
+                                    "type": "integer"
+                                },
+                                "transferTo": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transfer DSTT tokens successfully",
+                        "default": {
+                            "amount": 1000,
+                            "transferTo": "0x3126081ee598F6658eF6b1aA6A067484759DE4cA"
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/responseMessage"
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/responseMessage"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "responseMessage": {
+            "type": "object",
+            "description": "response message",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "code",
+                "succuess"
+            ]
+        }
+    }
+}
